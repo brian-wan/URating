@@ -22,7 +22,7 @@ def get_tasks():
 
 
 @app.route('/urating/api/v1.0/matches/<int:match_id>', methods=['GET'])
-def get_task(match_id):
+def get_matches(match_id):
     match = [match for match in matches if match['id'] == match_id]
     if len(match) == 0:
         abort(404)
