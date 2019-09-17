@@ -16,7 +16,6 @@ matches = [
     }
 ]
 
-
 @app.route('/urating/api/v1.0/matches', methods=['GET'])
 def get_tasks():
     return jsonify({'matches': matches})
@@ -56,7 +55,7 @@ def update_match(match_id):
         abort(400)
     match[0]['title'] = request.json.get('title', match[0]['title'])
     match[0]['score'] = request.json.get(
-        'score', task[0]['score'])
+        'score', match[0]['score'])
     return jsonify({'match': match[0]})
 
 
