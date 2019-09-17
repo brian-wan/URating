@@ -1,11 +1,15 @@
 import React from 'react';
+import "bootstrap/dist/css/bootstrap.min.css";
 import './App.css';
+import Table from './Components/Table.js';
 
 class App extends React.Component{
 
   constructor(props) {
     super(props);
     this.state = {
+      matchList: [],
+      matchTitle: ""
     }
   }
 
@@ -19,7 +23,14 @@ class App extends React.Component{
       )
       .then(res => res.json())
       .then(data => {
-        console.log(data)
+        //console.log(data)
+        this.setState({
+            matchList: data.matches,
+            matchTitle: data.matches[0].title
+        })
+        //console.log(data.matches);
+        //console.log(data.matches[0]);
+        //console.log(data.matches[0].score);
       })
       .catch(err => {
         console.log(err)
@@ -29,7 +40,7 @@ class App extends React.Component{
   render(){
     return (
       <div className="App">
-
+        <Table matchList={this.state.matchList} matchTitle = {this.state.matchTitle}></Table>
       </div>
     );
   }
