@@ -17,14 +17,12 @@ class App extends React.Component{
           method: 'GET', 
         }
       )
-      .then(res => res.text())
+      .then(res => res.json())
       .then(data => {
         console.log(data)
-        console.log("wth")
       })
       .catch(err => {
         console.log(err)
-        console.log("wtf")
       })
   }
   
