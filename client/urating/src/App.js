@@ -57,10 +57,9 @@ class App extends React.Component{
               </div>
             </nav>
           </div>
-          <div className = "row">
-            <div className = "col-4 mx-auto mt-5"><Table matchList={this.state.matchList} matchTitle = {this.state.matchTitle}></Table></div>
-          </div>
-          <Route path="/" exact component={Table} />
+          <Route exact path="/" 
+          render = {(props) => <div className = "col-4 mx-auto mt-5"><Table matchList={this.state.matchList} matchTitle = {this.state.matchTitle}></Table></div>}
+          />
           <Route path="/create" component={CreateMatch} />
         </div>
       </Router>
