@@ -11,11 +11,12 @@ export default class Table extends Component {
         return (
             <div className = "list-group">
                 {this.props.matchList.map((element) => 
-                <div className = "card m-2 p-5">
+                <div className = "card m-2 p-5" key = {element.id}>
                 <Match 
                     matchID = {element.id} 
                     matchScore = {element.score} 
-                    matchTitle = {element.title}>
+                    matchTitle = {element.title}
+                >
                 </Match>
                 </div>)}
             </div>
