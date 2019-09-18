@@ -59,6 +59,8 @@ class App extends React.Component{
         console.log(err)
       })
 
+    window.location.reload(true);
+
     console.log(title);
     console.log(score);
   }
