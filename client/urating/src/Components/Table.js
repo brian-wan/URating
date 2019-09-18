@@ -5,7 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 export default class Table extends Component {
 
     render() {
-        if (this.props.matchList[0] === undefined)
+        if (this.props.matchList === undefined || this.props.matchList[0] === undefined)
             return null;
 
         return (
