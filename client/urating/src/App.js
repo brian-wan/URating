@@ -33,11 +33,12 @@ class App extends React.Component{
       })
   }
 
-  addMatch = (title, score) => {
+  addMatch = (id, title, score) => {
     let tempMatchList = this.state.matchList;
     tempMatchList.push(
-      {'title': title, 
-       'score': score
+      { 'id': id,
+        'title': title, 
+        'score': score
       });
       
     this.setState({
@@ -74,7 +75,7 @@ class App extends React.Component{
           render = {(props) => <div className = "col-4 mx-auto mt-5"><Table matchList={this.state.matchList} matchTitle = {this.state.matchTitle}></Table></div>}
           />
           <Route path="/create" 
-          render = {(props) => <CreateMatch addMatch = {this.addMatch}></CreateMatch>}
+          render = {(props) => <CreateMatch addMatch = {this.addMatch} matchList = {this.state.matchList}></CreateMatch>}
           />
         </div>
       </Router>

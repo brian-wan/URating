@@ -41,7 +41,7 @@ export default class CreateMatch extends Component {
             matchCompleted: false
         })
 
-        this.props.addMatch(this.state.matchTitle, this.state.matchScore);
+        this.props.addMatch(this.props.matchList.length+1,this.state.matchTitle, this.state.matchScore);
     }
 
     render() {
