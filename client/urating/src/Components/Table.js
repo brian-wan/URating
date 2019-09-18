@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Match from './Match.js';
+import "bootstrap/dist/css/bootstrap.min.css";
 
 export default class Table extends Component {
 
@@ -8,11 +9,15 @@ export default class Table extends Component {
             return null;
 
         return (
-            <div>
-                <Match matchID = {this.props.matchList[0].id} matchScore = {this.props.matchList[0].score} matchTitle = {this.props.matchList[0].title}>
+            <div className = "list-group">
+                {this.props.matchList.map((element) => 
+                <div className = "card m-2 p-5">
+                <Match 
+                    matchID = {element.id} 
+                    matchScore = {element.score} 
+                    matchTitle = {element.title}>
                 </Match>
-                <Match matchID = {this.props.matchList[1].id} matchScore = {this.props.matchList[1].score} matchTitle = {this.props.matchList[1].title}>
-                </Match>
+                </div>)}
             </div>
         )
     }

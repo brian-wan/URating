@@ -23,14 +23,10 @@ class App extends React.Component{
       )
       .then(res => res.json())
       .then(data => {
-        //console.log(data)
         this.setState({
             matchList: data.matches,
             matchTitle: data.matches[0].title
         })
-        //console.log(data.matches);
-        //console.log(data.matches[0]);
-        //console.log(data.matches[0].score);
       })
       .catch(err => {
         console.log(err)
@@ -39,8 +35,13 @@ class App extends React.Component{
   
   render(){
     return (
-      <div className="App">
-        <Table matchList={this.state.matchList} matchTitle = {this.state.matchTitle}></Table>
+      <div className = "container">
+        <div className = "row text-center">
+          <h1 className = "col-12 mt-5">URating</h1>
+        </div>
+        <div className = "row">
+          <div className = "col-4 mx-auto mt-5"><Table matchList={this.state.matchList} matchTitle = {this.state.matchTitle}></Table></div>
+        </div>
       </div>
     );
   }
