@@ -34,16 +34,30 @@ class App extends React.Component{
   }
 
   addMatch = (id, title, score) => {
-    let tempMatchList = this.state.matchList;
-    tempMatchList.push(
-      { 'id': id,
-        'title': title, 
-        'score': score
-      });
+    //let tempMatchList = this.state.matchList;
+    let newMatch = {'id': id, 'title': title, 'score': score};
+    //tempMatchList.push(newMatch);
       
-    this.setState({
+    /*this.setState({
         matchList: tempMatchList
-    })
+    })*/
+
+    fetch('/urating/api/v1.0/matches', 
+        {
+          method: 'POST', 
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify(newMatch)
+        }
+      )
+      .then(res => res.json())
+      .then(data => {
+        this.setState({
+            matchList: data.matches
+        })
+      })
+      .catch(err => {
+        console.log(err)
+      })
 
     console.log(title);
     console.log(score);
