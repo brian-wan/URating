@@ -31,15 +31,17 @@ export default class CreateMatch extends Component {
     onSubmit(e) {
         e.preventDefault();
         
-        console.log(`Form submitted:`);
+        /*console.log(`Form submitted:`);
         console.log(`Match Title: ${this.state.matchTitle}`);
-        console.log(`Match Score: ${this.state.matchScore}`);
+        console.log(`Match Score: ${this.state.matchScore}`);*/
 
         this.setState({
             matchTitle: "",
             matchScore: "",
             matchCompleted: false
         })
+
+        this.props.addMatch(this.state.matchTitle, this.state.matchScore);
     }
 
     render() {

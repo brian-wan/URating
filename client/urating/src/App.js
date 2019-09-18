@@ -10,8 +10,7 @@ class App extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
-      matchList: [],
-      matchTitle: ""
+      matchList: []
     }
   }
 
@@ -26,13 +25,27 @@ class App extends React.Component{
       .then(res => res.json())
       .then(data => {
         this.setState({
-            matchList: data.matches,
-            matchTitle: data.matches[0].title
+            matchList: data.matches
         })
       })
       .catch(err => {
         console.log(err)
       })
+  }
+
+  addMatch = (title, score) => {
+    let tempMatchList = this.state.matchList;
+    tempMatchList.push(
+      {'title': title, 
+       'score': score
+      });
+      
+    this.setState({
+        matchList: tempMatchList
+    })
+
+    console.log(title);
+    console.log(score);
   }
   
   render(){
@@ -60,7 +73,9 @@ class App extends React.Component{
           <Route exact path="/" 
           render = {(props) => <div className = "col-4 mx-auto mt-5"><Table matchList={this.state.matchList} matchTitle = {this.state.matchTitle}></Table></div>}
           />
-          <Route path="/create" component={CreateMatch} />
+          <Route path="/create" 
+          render = {(props) => <CreateMatch addMatch = {this.addMatch}></CreateMatch>}
+          />
         </div>
       </Router>
     );
