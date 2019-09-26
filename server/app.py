@@ -25,7 +25,7 @@ class Player(db.Model):
         'Match', secondary='player_matches', backref=db.backref('players', lazy='dynamic'))
 
     def __repr__(self):
-        return f"User('{self.username}', '{self.matches}')"
+        return f"User('{self.username}')"
 
 
 class Match(db.Model):
@@ -53,10 +53,26 @@ def get_matches():
             'score': match.score,
             'winner': match.winner,
             'loser': match.loser,
-            'date_posted': match.date_posted
+            'date_posted': match.date_posted,
+            'id': match.id
         }
         matches_json[match.title] = match_json
     return jsonify({'matches': matches_json})
+
+
+@app.route('/urating/api/v1.0/players', methods=['GET'])
+def get_players():
+    # returns json with key-values for each player json
+    players_json = {}
+    for player in Player.query.all():
+        player_json = {
+            'username': player.username,
+            'password': player.password,
+            'id': player.id
+
+        }
+        players_json[player.username] = player_json
+    return jsonify({'players': players_json})
 
 
 @app.route('/urating/api/v1.0/matches/<int:match_id>', methods=['GET'])
@@ -71,6 +87,17 @@ def get_match(match_id):
         'date_posted': match.date_posted
     }
     return jsonify({'match': match_json})
+
+
+@app.route('/urating/api/v1.0/players/<int:player_id>', methods=['GET'])
+def get_player(player_id):
+    # returns json of single player
+    player = Player.query.get(player_id)
+    player_json = {
+        'username': player.username,
+        'password': player.password,
+    }
+    return jsonify({'player': player_json})
 
 
 @app.route('/urating/api/v1.0/create_match', methods=['POST'])
@@ -90,6 +117,7 @@ def create_match():
     # add match
     db.session.add(match)
     db.session.commit()
+    return jsonify({'result': True})
 
 
 @app.route('/urating/api/v1.0/create_player', methods=['POST'])
@@ -101,35 +129,32 @@ def create_player():
     # add player
     db.session.add(player)
     db.session.commit()
-
-
-# not done yet
-"""
-@app.route('/urating/api/v1.0/matches/<int:match_id>', methods=['PUT'])
-def update_match(match_id):
-    match = [match for match in matches if match['id'] == match_id]
-    if len(match) == 0:
-        abort(404)
-    if not request.json:
-        abort(400)
-    if 'title' in request.json and type(request.json['title']) != unicode:
-        abort(400)
-    if 'score' in request.json and type(request.json['score']) is not unicode:
-        abort(400)
-    match[0]['title'] = request.json.get('title', match[0]['title'])
-    match[0]['score'] = request.json.get(
-        'score', task[0]['score'])
-    return jsonify({'match': match[0]})
-
-
-@app.route('/urating/api/v1.0/matches/<int:match_id>', methods=['DELETE'])
-def delete_match(match_id):
-    match = [match for match in matches if match['id'] == match_id]
-    if len(match) == 0:
-        abort(404)
-    matches.remove(match[0])
     return jsonify({'result': True})
-"""
+
+
+@app.route('/urating/api/v1.0/delete_match/<int:match_id>', methods=['DELETE'])
+def delete_match(match_id):
+    # Remove from match table and remove from both players
+    # A lot more complicated once more features added since all need to be undone
+    # currently just removes match from matches and removes match from two players
+    # If eventually there is rating and stuff removing a match would be hell
+    if not Match.query.filter_by(id=match_id).first():
+        abort(404)
+
+    matchToDelete = Match.query.filter_by(id=match_id).first()
+    db.session.delete(matchToDelete)
+    db.session.commit()
+    return jsonify({'result': True})
+
+
+@app.route('/urating/api/v1.0/delete_player/<int:match_id>', methods=['DELETE'])
+def delete_player(player_id):
+    if not Player.query.filter_by(id=player_id).first():
+        abort(404)
+    playerToDelete = Player.query.filter_by(id=player_id).first()
+    db.session.delete(playerToDelete)
+    db.session.commit()
+    return jsonify({'result': True})
 
 
 @app.route('/')
