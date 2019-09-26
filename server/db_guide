@@ -1,4 +1,4 @@
->>> db.create_all()
+>>> db.create_all() 
 >>> player1 = Player(username="Brian", password = "Brian")
 >>> player2 = Player(username="Alex", password = "Alex")
 >>> db.session.add(player1)
