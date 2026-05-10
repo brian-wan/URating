@@ -51,8 +51,8 @@
 		8D8D4C5E0CF7EF97A1A79631 /* PlayersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersView.swift; sourceTree = "<group>"; };
 		96FED70CFE548B1D8AA24C69 /* LeagueMembership.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueMembership.swift; sourceTree = "<group>"; };
 		970DC8D6C1BE9CC1A3E6EBA2 /* TournamentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentsView.swift; sourceTree = "<group>"; };
-		97665E482FB0E4A400F4EC71 /* BracketEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BracketEngine.swift; sourceTree = "<group>"; };
-		97665E4A2FB0E4CB00F4EC71 /* BracketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BracketView.swift; sourceTree = "<group>"; };
+		97665E482FB0E4A400F4EC71 /* BracketEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BracketEngine.swift; path = Sources/URating/Services/BracketEngine.swift; sourceTree = "<group>"; };
+		97665E4A2FB0E4CB00F4EC71 /* BracketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BracketView.swift; path = Sources/URating/Views/Tournaments/BracketView.swift; sourceTree = "<group>"; };
 		97F89C623D84EE9A615BFF33 /* LeaderboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardView.swift; sourceTree = "<group>"; };
 		A94EC9D428D5412F02562D48 /* URating.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = URating.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE22635A63662F66E8774004 /* CreateLeagueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateLeagueView.swift; sourceTree = "<group>"; };
