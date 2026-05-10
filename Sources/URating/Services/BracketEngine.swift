@@ -124,7 +124,13 @@ enum BracketEngine {
         if isTop { bracket.matches[nextIdx].topID    = winnerID }
         else     { bracket.matches[nextIdx].bottomID = winnerID }
 
-        // Auto-advance if opponent is a bye
+        // Auto-advance only if the sibling feeder match was already a bye (complete before anyone played).
+        // If sibling is an unplayed real match, its winnerID is nil — same as a bye — so we must
+        // explicitly check isComplete to avoid wrongly crowning a champion too early.
+        let siblingPos = isTop ? position + 1 : position - 1
+        let siblingComplete = bracket.slot(round: round, position: siblingPos)?.isComplete == true
+        guard siblingComplete else { return }
+
         let top    = bracket.matches[nextIdx].topID
         let bottom = bracket.matches[nextIdx].bottomID
         if top != nil && bottom == nil { bracket.matches[nextIdx].winnerID = top }
